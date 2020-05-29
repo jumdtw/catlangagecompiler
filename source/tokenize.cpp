@@ -40,144 +40,118 @@ void tokenize(char *p){
             continue;
         }
 
-        // 0xの判別
-        if(!memcmp(hex,p,2)){
-            p+=2;
-            token.ty = TK_NUM;
+        // ステーキの判別
+        if(strncmp(p,"purrmeowmeow",12)==0&&!is_alnum(p[12])){
+            token.ty = TK_MEET;
             token.str = p;
-            token.val = strtol(p,&p,16);
+            p+=12;
+            tokens.push_back(token);
+            continue;
+        }
+        // hello文の判別
+        if(strncmp(p,"purrmeowpurr",12)==0&&!is_alnum(p[12])){
+            token.ty = TK_HELLO;
+            token.str = p;
+            p+=12;
+            tokens.push_back(token);
+            continue;
+        }
+        // 疲れたの判別
+        if(strncmp(p,"purrpurrpurr",12)==0&&!is_alnum(p[12])){
+            token.ty = TK_TIRED;
+            token.str = p;
+            p+=12;
             tokens.push_back(token);
             continue;
         }
 
-        // 0bの判別
-        if(!memcmp(bin,p,2)){
-            p+=2;
-            token.ty = TK_NUM;
+        // +の判別
+        if(strncmp(p,"roarmeow",8)==0&&!is_alnum(p[8])){
+            token.ty = TK_PLUS;
             token.str = p;
-            token.val = strtol(p,&p,2);
+            p+=8;
             tokens.push_back(token);
             continue;
         }
-
-        // arr1 == arr2 の時の戻り値が０
-        // == 
-        if(!memcmp(sete,p,2)){    
-            token.ty = TK_SETE;
+        // -の判別
+        if(strncmp(p,"roarpurr",8)==0&&!is_alnum(p[8])){
+            token.ty = TK_MINUS;
             token.str = p;
-            token.len = 2;
+            p+=8;
             tokens.push_back(token);
-            p+=2;
-            continue;
-        }
-        // !=
-        if(!memcmp(setne,p,2)){    
-            token.ty = TK_SETNE;
-            token.str = p;
-            token.len = 2;
-            tokens.push_back(token);
-            p+=2;
-            continue;
-        }
-        // <= or >=
-        if(!memcmp(setle,p,2)||!memcmp(setle_re,p,2)){    
-            token.ty = TK_SETLE;
-            token.str = p;
-            token.len = 2;
-            tokens.push_back(token);
-            p+=2;
             continue;
         }
         
-        if(*p == '(' || *p == ')' || *p=='+' || *p=='-' || *p=='*' || *p=='/' || *p=='<' || *p=='>' || *p=='=' || *p == ';' || *p=='{' || *p=='}' || *p==',' || *p=='&' || *p=='[' || *p==']'){    
-            token.ty = *p;
-            token.str = p;
-            token.len = 1;
-            tokens.push_back(token);
-            p++;
-            continue;
-        }
-
-
-
-        //10進数の数字であるか否か
-        if(isdigit(*p)){
+        // 数値の判別
+        // 0
+        if(strncmp(p,"meowmeowmeowmeow",16)==0&&!is_alnum(p[16])){
             token.ty = TK_NUM;
+            token.val = 0;
             token.str = p;
-            token.val = strtol(p,&p,10);
+            p+=16;
             tokens.push_back(token);
             continue;
         }
-
-        // loop文の判別
-        if(strncmp(p,"loop",4)==0&&!is_alnum(p[4])){
-            token.ty = TK_LOOP;
+        // 1
+        if(strncmp(p,"meowmeowmeowpurr",16)==0&&!is_alnum(p[16])){
+            token.ty = TK_NUM;
+            token.val = 1;
             token.str = p;
-            p+=4;
+            p+=16;
             tokens.push_back(token);
             continue;
         }
-
-        // return文の判別
-        if(strncmp(p,"return",6)==0&&!is_alnum(p[6])){
-            token.ty = TK_RETURN;
+        // 2
+        if(strncmp(p,"meowmeowpurrmeow",16)==0&&!is_alnum(p[16])){
+            token.ty = TK_NUM;
+            token.val = 2;
             token.str = p;
-            p+=6;
+            p+=16;
             tokens.push_back(token);
             continue;
         }
-
-        //if文の判別
-        if(strncmp(p,"if",2)==0&&!is_alnum(p[2])){
-            token.ty = TK_IF;
+        // 3
+        if(strncmp(p,"meowmeowpurrpurr",16)==0&&!is_alnum(p[16])){
+            token.ty = TK_NUM;
+            token.val = 3;
             token.str = p;
-            p+=2;
+            p+=16;
             tokens.push_back(token);
             continue;
         }
-        //else文の判別
-        if(strncmp(p,"else",4)==0&&!is_alnum(p[4])){
-            token.ty = TK_ELSE;
+        // 4
+        if(strncmp(p,"meowpurrmeowmeow",16)==0&&!is_alnum(p[16])){
+            token.ty = TK_NUM;
+            token.val = 4;
             token.str = p;
-            p+=4;
+            p+=16;
             tokens.push_back(token);
             continue;
         }
-        //while文の判別
-        if(strncmp(p,"while",5)==0&&!is_alnum(p[5])){
-            token.ty = TK_WHILE;
+        // 5
+        if(strncmp(p,"meowpurrmeowpurr",16)==0&&!is_alnum(p[16])){
+            token.ty = TK_NUM;
+            token.val = 5;
             token.str = p;
-            p+=5;
+            p+=16;
             tokens.push_back(token);
             continue;
         }
-
-        // charの判別
-        if(strncmp(p,"char",4)==0&&!is_alnum(p[4])){
-            token.ty = TK_CHAR;
+        // 6
+        if(strncmp(p,"meowpurrpurrmeow",16)==0&&!is_alnum(p[16])){
+            token.ty = TK_NUM;
+            token.val = 6;
             token.str = p;
-            p+=4;
+            p+=16;
             tokens.push_back(token);
             continue;
         }
-
-        // shortの判別
-        if(strncmp(p,"short",5)==0&&!is_alnum(p[5])){
-            token.ty = TK_SHORT;
+        // 7
+        if(strncmp(p,"meowpurrpurrpurr",16)==0&&!is_alnum(p[16])){
+            token.ty = TK_NUM;
+            token.val = 7;
             token.str = p;
-            p+=5;
-            tokens.push_back(token);
-            continue;
-        }
-
-
-        
-        //変数の判別
-        if('a' <= *p && *p <= 'z' || 'A' <= *p && *p <= 'Z'){
-            token.ty = TK_IDENT;
-            token.str = p;
-            token.len = lvar_len(p);
-            p += token.len;  // ここでたしてあげないと文字数分ずれない。
+            p+=16;
             tokens.push_back(token);
             continue;
         }

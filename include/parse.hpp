@@ -6,29 +6,12 @@
 
 enum{
     ND_NUM = 4334,
-    ND_IMM_ARRAY,
-    ND_POINTER,
-    ND_ADDER,
-    // 比較演算
-    ND_ASSIGN,
-    ND_POINTER_ASSIGN, // 0xff以下
-    ND_POINTER_ASSIGN_ABS, // 0xffより上（別に0xff以下でも使える）
-    ND_RETURN,
-    ND_IF,
-    ND_ELSE,
-    ND_WHILE,
-    ND_LOOP,
-    ND_FUNC,
-    ND_FUNC_DEFINE,
-    ND_LVAR,
-    ND_ARRAY,
-    ND_BLOCK,
-    ND_CHAR,
-    ND_SHORT,
-    ND_SETE,  // ==
-    ND_SETL,  // <
-    ND_SETLE, // <=
-    ND_SETNE, // !=
+    ND_MEET,
+    ND_HELLO,
+    ND_TIRED,
+    ND_PLUS,
+    ND_MINUS,
+    ND_EOF,  
 };
 
 
